@@ -1,4 +1,4 @@
-import {BrowserRouter, Routes, Route} from "react-router-dom";
+import {BrowserRouter, Routes, Route, Navigate} from "react-router-dom";
 import {Container} from "@mui/material";
 import TheHeader from "./components/TheHeader";
 import MainPage from "./pages/MainPage";
@@ -19,6 +19,7 @@ const App = () => {
                     <Route path="/character">
                         <Route path=":id" element={<CharacterPage />} />
                     </Route>
+                    <Route path="*" element={<Navigate to="/" replace />} />
                 </Routes>
             </BrowserRouter>
         </Container>
