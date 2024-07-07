@@ -1,4 +1,4 @@
-import { action, computed, makeObservable, observable, runInAction } from "mobx";
+import {action, computed, makeObservable, observable, reaction, runInAction} from "mobx";
 import { ICharacter } from "../../types/character";
 import { getAllCharacters } from "../../services";
 
@@ -14,6 +14,13 @@ class CharactersStore {
             fetchCharacters: action.bound,
             charactersTotalCount: computed,
         });
+
+        reaction(
+            () => this.characters.length,
+            (length: number) => {
+                console.log(`Текущее количество персонажей: ${length}`);
+            }
+        );
     }
 
     get charactersTotalCount() {
