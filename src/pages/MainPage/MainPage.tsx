@@ -6,24 +6,24 @@ import CharactersList from "../../components/CharactersList";
 import {useStores} from "../../stores/RootStore/RootStoreContext.ts";
 
 const MainPage = observer(() => {
-    const { characters } = useStores();
+    const { characters: {characters, fetchCharacters, isLoading} } = useStores();
 
     useEffect(() => {
-        characters.fetchCharacters();
-    }, [characters.fetchCharacters]);
+        fetchCharacters();
+    }, [fetchCharacters]);
 
     return (
         <Box sx={{ flexGrow: 1 }}>
             <CharactersFilter />
 
-            {characters.isLoading ? (
+            {isLoading ? (
                 <Grid container justifyContent="center">
                     <Grid item>
                         <CircularProgress />
                     </Grid>
                 </Grid>
             ) : (
-                <CharactersList items={characters.characters} />
+                <CharactersList items={characters} />
             )}
         </Box>
     );
